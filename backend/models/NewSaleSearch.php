@@ -62,7 +62,11 @@ class NewSaleSearch extends NewSale
 
         // grid filtering conditions
 
-        $query->andFilterWhere(['like', 'customer_name', $this->globalSearch]);
+        $query->orFilterWhere(['like', 'customer_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'cell_phone_brand', $this->globalSearch])
+            ->orFilterWhere(['like', 'cell_phone_model', $this->globalSearch])
+            ->orFilterWhere(['like', 'date_of_sale', $this->globalSearch])
+            ->orFilterWhere(['like', 'sale_price', $this->globalSearch]);
 
         return $dataProvider;
     }

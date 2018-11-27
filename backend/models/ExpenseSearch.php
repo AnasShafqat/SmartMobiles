@@ -62,7 +62,9 @@ class ExpenseSearch extends Expense
 
         // grid filtering conditions
     
-        $query->andFilterWhere(['like', 'expense_name', $this->globalSearch]);
+        $query->orFilterWhere(['like', 'expense_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'amount', $this->globalSearch])
+            ->orFilterWhere(['like', 'date', $this->globalSearch]);
 
         return $dataProvider;
     }

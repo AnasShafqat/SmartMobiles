@@ -62,7 +62,9 @@ class IncomeSearch extends Income
 
         // grid filtering conditions
 
-        $query->andFilterWhere(['like', 'income_name', $this->globalSearch]);
+        $query->orFilterWhere(['like', 'income_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'amount', $this->globalSearch])
+            ->orFilterWhere(['like', 'date', $this->globalSearch]);
 
         return $dataProvider;
     }

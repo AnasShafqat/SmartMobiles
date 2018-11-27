@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'sale_id',
+            //'purchase.IMEI',
             'customer_name',
             'customer_contact_no',
             //'date_of_sale',
@@ -38,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'created_by',
             //'updated_by',
-
+            
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

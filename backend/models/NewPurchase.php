@@ -61,7 +61,7 @@ class NewPurchase extends \yii\db\ActiveRecord
     {
         return [
             'purchase_id' => Yii::t('app', 'Purchase ID'),
-            'IMEI' => Yii::t('app', 'Imei'),
+            'IMEI' => Yii::t('app', 'IMEI #'),
             'seller_name' => Yii::t('app', 'Seller Name'),
             'seller_contact_no' => Yii::t('app', 'Seller Contact No'),
             'purchase_price' => Yii::t('app', 'Purchase Price'),
