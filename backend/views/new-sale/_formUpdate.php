@@ -17,7 +17,10 @@ use backend\models\Income;
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <div class="col-md-4">
-            <?= $form->field($model, 'purchase_id')->textInput() ?>     
+            <?= $form->field($model, 'purchase_id')->dropDownList(
+                ArrayHelper::map(NewPurchase::find()->where(['status'=>'Active'])->all(),'purchase_id','IMEI'),
+                ['prompt'=>'','id' => 'purchaseID']
+            )?>     
         </div>
         <div class="col-md-4">
             <?= $form->field($model, 'cell_phone_brand')->textInput(['id' => 'cellPhoneBrand', 'readonly' => true, 'onchange' => 'setPhoneBrand();']) ?>
@@ -31,16 +34,20 @@ use backend\models\Income;
             <?= $form->field($model, 'customer_name')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'customer_contact_no')->widget(yii\widgets\MaskedInput::class, [
-                'mask' => '+99-999-9999999',
+            <?= $form->field($model, 'cnic')->widget(yii\widgets\MaskedInput::class, [
+                'mask' => '99999-9999999-9',
                 ]) ?>
         </div>
         <div class="col-md-4">
-            <?= $form->field($model, 'sale_price')->textInput(['maxlength' => 6, 'id' => 'saleAmount' , 'onchange' => 'setAmount();']) ?>
-        </div>
-        
+            <?= $form->field($model, 'customer_contact_no')->widget(yii\widgets\MaskedInput::class, [
+                'mask' => '+99-999-9999999',
+                ]) ?>
+        </div>        
     </div>
     <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'sale_price')->textInput(['maxlength' => 6, 'id' => 'saleAmount' , 'onchange' => 'setAmount();']) ?>
+        </div>
         <div class="col-md-4">
             <label>Selling Date</label>
             <?= DateTimePicker::widget([
@@ -55,23 +62,23 @@ use backend\models\Income;
                     ]
                 ]);?>
         </div>
+    </div>    
+    
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <?= Html::submitButton(Yii::t('app', '+ Add Sale'), ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="row invisible">
         <div class="col-md-4 invisible">
             <?= $form->field($model, 'created_at')->textInput() ?>
         </div>
         <div class="col-md-4 invisible">
             <?= $form->field($model, 'updated_at')->textInput() ?>
         </div>
-    </div>    
-    
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
-            </div>
-        </div>
-    </div>
-
-    <div class="row invisible">
         <div class="col-md-4">
             <?= $form->field($income, 'income_name')->textInput(['maxlength' => true, 'id' => 'incomeName']) ?>
         </div>
@@ -83,3 +90,32 @@ use backend\models\Income;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+<!-- AJAX Request for set cell_phone_brand and cell_phone_model start...! -->
+<?php
+$url = \yii\helpers\Url::to("new-sale/ajax-request-newpurchase");
+
+$script = <<< JS
+$('#purchaseID').on('change',function(){
+   var purchaseID = $('#purchaseID').val();
+    $.ajax({
+        type:'POST',
+        data:{purchaseID:purchaseID},
+        url: "$url",
+        success:function(result){
+            var jsonResult = JSON.parse(result.substring(result.indexOf('{'), result.indexOf('}') + 1));
+
+            var cellPhoneBrand = jsonResult.cell_phone_brand;
+            var cellPhoneModel = jsonResult.cell_phone_model;
+            $('#cellPhoneBrand').val(cellPhoneBrand);  
+            $('#cellPhoneModel').val(cellPhoneModel);
+            
+        }         
+    });         
+});
+
+JS;
+$this->registerJs($script);
+?>
+<!-- AJAX Request for set cell_phone_brand and cell_phone_model close...! -->

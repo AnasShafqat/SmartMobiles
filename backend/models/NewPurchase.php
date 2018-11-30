@@ -11,6 +11,7 @@ use yii\helpers\Url;
  * @property int $purchase_id
  * @property string $IMEI
  * @property string $seller_name
+ * @property string $cnic
  * @property string $seller_contact_no
  * @property int $purchase_price
  * @property string $date_of_purchase
@@ -42,7 +43,7 @@ class NewPurchase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['IMEI', 'seller_name', 'seller_contact_no', 'purchase_price', 'date_of_purchase', 'cnic_front_pic', 'cnic_back_pic', 'cell_phone_front_pic', 'cell_phone_back_pic', 'cell_phone_brand', 'cell_phone_model', 'status', 'created_by', 'updated_by'], 'safe'],
+            [['IMEI', 'cnic', 'seller_name', 'seller_contact_no', 'purchase_price', 'date_of_purchase', 'cnic_front_pic', 'cnic_back_pic', 'cell_phone_front_pic', 'cell_phone_back_pic', 'cell_phone_brand', 'cell_phone_model', 'status', 'created_by', 'updated_by'], 'safe'],
             [['purchase_price', 'created_by', 'updated_by'], 'integer'],
             [['date_of_purchase', 'created_at', 'updated_at'], 'safe'],
             [['status'], 'string'],
@@ -61,9 +62,10 @@ class NewPurchase extends \yii\db\ActiveRecord
     {
         return [
             'purchase_id' => Yii::t('app', 'Purchase ID'),
-            'IMEI' => Yii::t('app', 'IMEI #'),
-            'seller_name' => Yii::t('app', 'Seller Name'),
-            'seller_contact_no' => Yii::t('app', 'Seller Contact No'),
+            'IMEI' => Yii::t('app', 'Cell Phone IMEI #'),
+            'seller_name' => Yii::t('app', 'Customer Name'),
+            'cnic' => Yii::t('app', 'Customer CNIC #'),
+            'seller_contact_no' => Yii::t('app', 'Customer Contact #'),
             'purchase_price' => Yii::t('app', 'Purchase Price'),
             'date_of_purchase' => Yii::t('app', 'Date Of Purchase'),
             'cnic_front_pic' => Yii::t('app', 'Cnic Front Pic'),

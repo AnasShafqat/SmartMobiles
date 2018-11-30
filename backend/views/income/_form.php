@@ -38,7 +38,7 @@ use dosamigos\datetimepicker\DateTimePicker;
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton(Yii::t('app', '+ Add Income'), ['class' => 'btn btn-success']) ?>
             </div>
         </div>
     </div>

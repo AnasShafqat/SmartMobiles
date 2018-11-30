@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'sale_id',
                 'purchase.IMEI',
                 'customer_name',
+                'cnic',
                 'customer_contact_no',
                 'cell_phone_brand',
                 'cell_phone_model',

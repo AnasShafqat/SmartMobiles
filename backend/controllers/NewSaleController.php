@@ -111,6 +111,10 @@ class NewSaleController extends Controller
             $model->updated_at = '0'; 
             $model->save();
 
+            // update purchase inactive after sale...
+            $status = 'Inactive';
+            $updatePurchase = Yii::$app->db->createCommand()->update('new_purchase', ['status' => $status])->execute();
+
             // income...
             $income->sale_id      = $model->sale_id;
             $income->date         = $model->date_of_sale;

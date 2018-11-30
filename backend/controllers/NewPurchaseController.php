@@ -242,7 +242,7 @@ class NewPurchaseController extends Controller
             $model->save();
 
             // expense update...
-            //$date         = $model->date_of_sale;
+            //$date       = $model->date_of_sale;
             $amount       = $model->purchase_price;
             $total_amount = $expenseData[0]['total_amount'] + $model->purchase_price;
             $expense_name  = $model->cell_phone_brand.' '.$model->cell_phone_model;

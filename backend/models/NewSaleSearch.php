@@ -22,7 +22,7 @@ class NewSaleSearch extends NewSale
     {
         return [
             [['sale_id', 'customer_contact_no', 'sale_price', 'created_by', 'updated_by'], 'integer'],
-            [['customer_name','globalSearch', 'date_of_sale', 'cell_phone_brand', 'cell_phone_model', 'created_at', 'updated_at'], 'safe'],
+            [['customer_name', 'cnic', 'globalSearch', 'date_of_sale', 'cell_phone_brand', 'cell_phone_model', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -63,6 +63,7 @@ class NewSaleSearch extends NewSale
         // grid filtering conditions
 
         $query->orFilterWhere(['like', 'customer_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'cnic', $this->globalSearch])
             ->orFilterWhere(['like', 'cell_phone_brand', $this->globalSearch])
             ->orFilterWhere(['like', 'cell_phone_model', $this->globalSearch])
             ->orFilterWhere(['like', 'date_of_sale', $this->globalSearch])

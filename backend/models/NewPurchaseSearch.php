@@ -22,7 +22,7 @@ class NewPurchaseSearch extends NewPurchase
     {
         return [
             [['purchase_id', 'IMEI', 'seller_contact_no', 'purchase_price', 'created_by', 'updated_by'], 'integer'],
-            [['seller_name', 'date_of_purchase', 'cnic_front_pic', 'cnic_back_pic', 'cell_phone_front_pic', 'cell_phone_back_pic', 'cell_phone_brand', 'cell_phone_model', 'created_at', 'updated_at', 'globalSearch'], 'safe'],
+            [['seller_name', 'cnic', 'date_of_purchase', 'cnic_front_pic', 'cnic_back_pic', 'cell_phone_front_pic', 'cell_phone_back_pic', 'cell_phone_brand', 'cell_phone_model', 'created_at', 'updated_at', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -63,6 +63,7 @@ class NewPurchaseSearch extends NewPurchase
         // grid filtering conditions
 
         $query->orFilterWhere(['like', 'seller_name', $this->globalSearch])
+            ->orFilterWhere(['like', 'cnic', $this->globalSearch])
             ->orFilterWhere(['like', 'date_of_purchase', $this->globalSearch])
             ->orFilterWhere(['like', 'seller_contact_no', $this->globalSearch])
             ->orFilterWhere(['like', 'purchase_price', $this->globalSearch])

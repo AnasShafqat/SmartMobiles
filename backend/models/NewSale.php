@@ -11,6 +11,7 @@ use Yii;
  * @property int $purchase_id
  * @property string $IMEI
  * @property string $customer_name
+ * @property string $cnic
  * @property string $customer_contact_no
  * @property string $date_of_sale
  * @property string $cell_phone_brand
@@ -40,11 +41,11 @@ class NewSale extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_name', 'customer_contact_no', 'date_of_sale', 'cell_phone_brand', 'cell_phone_model', 'sale_price'], 'required'],
+            [['customer_name', 'cnic', 'customer_contact_no', 'date_of_sale', 'cell_phone_brand', 'cell_phone_model', 'sale_price'], 'required'],
             [['purchase_id', 'sale_price', 'created_by', 'updated_by'], 'integer'],
             [['purchase_id', 'date_of_sale', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'safe'],
             [['cell_phone_brand'], 'string'],
-            [['customer_contact_no'], 'string', 'max' => 15],
+            [['customer_contact_no','cnic'], 'string', 'max' => 15],
             [['customer_name'], 'string', 'max' => 30],
             [['cell_phone_model'], 'string', 'max' => 32],
             [['purchase_id'], 'exist', 'skipOnError' => true, 'targetClass' => NewPurchase::className(), 'targetAttribute' => ['purchase_id' => 'purchase_id']],
@@ -58,8 +59,9 @@ class NewSale extends \yii\db\ActiveRecord
     {
         return [
             'sale_id' => Yii::t('app', 'Sale ID'),
-            'purchase_id' => Yii::t('app', 'IMEI'),
+            'purchase_id' => Yii::t('app', 'Cell Phone IMEI #'),
             'customer_name' => Yii::t('app', 'Customer Name'),
+            'cnic' => Yii::t('app', 'CNIC #'),
             'customer_contact_no' => Yii::t('app', 'Customer Contact No'),
             'date_of_sale' => Yii::t('app', 'Date Of Sale'),
             'cell_phone_brand' => Yii::t('app', 'Cell Phone Brand'),

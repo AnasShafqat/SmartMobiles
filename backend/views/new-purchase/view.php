@@ -71,6 +71,7 @@ $option4 = ['data-lightbox'=>'profile image','data-title'=>$cellPhoneBackPicInfo
             'purchase_id',
             'IMEI',
             'seller_name',
+            'cnic',
             'seller_contact_no',
             'purchase_price',
             'date_of_purchase',

@@ -56,7 +56,7 @@
 		$startDate = $_POST["startDate"];
 		$endDate = $_POST["endDate"];
 
-    $dailyIncome = Yii::$app->db->createCommand("SELECT date,income_name,amount,total_amount FROM income WHERE CAST(date AS DATE) >= '$startDate' OR CAST(date AS DATE) <= $endDate")->queryAll();
+        $dailyIncome = Yii::$app->db->createCommand("SELECT date,income_name,amount,total_amount FROM income WHERE CAST(date AS DATE) >= '$startDate' OR CAST(date AS DATE) <= $endDate")->queryAll();
 ?>
 
 <div class="row">
